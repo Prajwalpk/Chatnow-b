@@ -85,7 +85,7 @@ app.post(
 	hasLoggedIn,
 	registerConfirmationPostHandler
 );
-app.get("/forgot-password", hasLoggedIn, forgotPasswordGetHandler);
+//app.get("/forgot-password", hasLoggedIn, forgotPasswordGetHandler);
 app.get("/log-out", logOutHandler);
 
 app.get("/access-denied", hasLoggedIn, (req, res) => res.send("Access denied"));
