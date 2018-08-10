@@ -8,15 +8,40 @@
 function sending()
 {
 var msg=document.getElementById("tmsgbox").value;
-alert(msg);
+var para1 = document.createElement("p");
+para1.setAttribute('class',"sendmsg");
+para1.innerHTML = msg;
+var ele=document.getElementById("bodyid");
+ele.appendChild(para1);
+var para2 = document.createElement("p");
+para2.innerHTML='</br></br></br>';
+ele.appendChild(para2);
+
+replytomsg();
+}
+function replytomsg()
+{
+	msg=document.getElementById("tmsgbox").value;
+	if(msg=="hi"||msg=="Hi")
+	{
+		var para1 = document.createElement("p");
+		para1.setAttribute('class',"revmsg");
+		para1.innerHTML = "Hi User 0";
+		var ele=document.getElementById("bodyid");
+		ele.appendChild(para1);
+		var para2 = document.createElement("p");
+		para2.innerHTML='</br></br></br></br>';
+		ele.appendChild(para2);
+		var para3 = document.createElement("p");
+		para3.setAttribute('class',"revmsg");
+		para3.innerHTML = "How may i help you?";
+		var ele=document.getElementById("bodyid");
+		ele.appendChild(para3);
+	}
 }
 </script>
-<p class="welcome">Welcome to Now Finance Chatnow-b    <img src="./public/art/chatimg.png"></p>
-<h2 class="revmsg">Hi User</h2></br></br></br></br></br>
-<p class="revmsg">How can we help you ?</p> 
+<p class="welcome">Welcome to Now Finance Chatnow-b    <img src="./art/chatimg.png"></p>
 <input type="textbox" id="tmsgbox" class="typemsgbox" placeholder="Type your message here"/>
 <input type="button" onclick="sending()" class="sendbutton" value="Send" />
-
-
 </body>
 </html>
