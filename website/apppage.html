@@ -35,13 +35,17 @@ function replytomsg()
 		var para3 = document.createElement("p");
 		para3.setAttribute('class',"revmsg");
 		para3.innerHTML = "How may i help you?";
-		var ele=document.getElementById("bodyid");
 		ele.appendChild(para3);
+		var para4 = document.createElement("p");
+		para4.innerHTML='</br></br></br></br>';
+		ele.appendChild(para4);
 	}
 }
 </script>
 <p class="welcome">Welcome to Now Finance Chatnow-b    <img src="./art/chatimg.png"></p>
 <input type="textbox" id="tmsgbox" class="typemsgbox" placeholder="Type your message here"/>
 <input type="button" onclick="sending()" class="sendbutton" value="Send" />
+
+
 </body>
 </html>
