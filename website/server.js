@@ -8,6 +8,7 @@ const Amplify = require("aws-amplify").default;
 const helmet = require("helmet");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 global.fetch = require("node-fetch");
 
@@ -19,8 +20,8 @@ const {
 	loginPostHandler,
 	registerGetHandler,
 	registerPostHandler,
-	//forgotPasswordGetHandler,
-	//forgotPasswordPostHandler,
+	// forgotPasswordGetHandler,
+	// forgotPasswordPostHandler,
 	registerConfirmationGetHandler,
 	registerConfirmationPostHandler,
 	errorHandler,
@@ -85,7 +86,7 @@ app.post(
 	hasLoggedIn,
 	registerConfirmationPostHandler
 );
-//app.get("/forgot-password", hasLoggedIn, forgotPasswordGetHandler);
+// app.get("/forgot-password", hasLoggedIn, forgotPasswordGetHandler);
 app.get("/log-out", logOutHandler);
 
 app.get("/access-denied", hasLoggedIn, (req, res) => res.send("Access denied"));
@@ -93,6 +94,9 @@ app.get("/profile", requiresLogin, (req, res) => {
 	res.render("Profile");
 });
 app.get("/oops", errorHandler);
+app.get("/try-now", (req, res) =>
+	res.sendFile(path.join(__dirname + "/try-now.html"))
+);
 
 //  Functions
 
