@@ -6,7 +6,6 @@ exports.get = function(req, res) {
 
 exports.post = async function(req, res) {
 	let { email: username, password, name } = req.body;
-
 	try {
 		const response = await Auth.signUp({
 			username,
@@ -21,12 +20,16 @@ exports.post = async function(req, res) {
 		req.session.user = newUser;
 		res.redirect("register-confirmation");
 	} catch (err) {
-		switch (err.code) {
-			case "UsernameExistsException":
-				res.render("register", { message: err.message });
-				break;
-			default:
-				res.redirect("oops");
+		if (typeof err === "string") {
+			res.render("register", {
+				message: err
+			});
+		} else if (typeof err === "object" && err.message) {
+			res.render("register", {
+				message: err.message
+			});
+		} else {
+			res.redirect("oops");
 		}
 	}
 };

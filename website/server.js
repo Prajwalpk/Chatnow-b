@@ -6,9 +6,10 @@ const methodOverride = require("method-override");
 const bodyParser = require("body-parser");
 const Amplify = require("aws-amplify").default;
 const helmet = require("helmet");
-const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const session = require("express-session");
+const FileStore = require("session-file-store")(session);
 
 global.fetch = require("node-fetch");
 
@@ -55,6 +56,7 @@ app.use(express.static(__dirname + "/public"));
 app.engine("handlebars", hbs({ defaultLayout: "skeleton" }));
 app.set("view engine", "handlebars");
 
+app.set("trust proxy", 1);
 app.use(helmet());
 app.use(compression());
 app.use(logger("dev"));
@@ -63,10 +65,12 @@ app.use(methodOverride());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
-	cookieSession({
-		name: "session",
-		keys: ["deakin", "chatnow-b"],
-		maxAge: 24 * 60 * 60 * 1000 // 24 hours
+	session({
+		name: "dk-chatnowb",
+		secret: "chatnowb",
+		saveUninitialized: true,
+		resave: true,
+		store: new FileStore()
 	})
 );
 const PORT = app.get("port");

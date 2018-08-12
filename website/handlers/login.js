@@ -5,17 +5,24 @@ exports.get = function(req, res) {
 };
 
 exports.post = async function(req, res) {
-	let { email: username, password, name } = req.body;
+	let { email: username, password } = req.body;
 
 	try {
-		const user = await Auth.signIn({
-			username,
-			password
-		});
+		const user = await Auth.signIn(username, password);
 
 		req.session.user = user;
 		res.redirect("profile");
 	} catch (err) {
-		res.redirect("oops");
+		if (typeof err === "string") {
+			res.render("login", {
+				message: err
+			});
+		} else if (typeof err === "object" && err.message) {
+			res.render("login", {
+				message: err.message
+			});
+		} else {
+			res.redirect("oops");
+		}
 	}
 };
