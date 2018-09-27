@@ -103,18 +103,21 @@
   color: #FE7436;
 }
 
-.nav-item .btn.btn-warning {
-  background-color: #ED591B;
-  color: white;
-}
-
 .navbar-toggler-icon {
   content: "";
   left: 0;
   width: 1em;
   height: 0.15em;
-  background: #F37029;
+  background: #6E6E6E;
   box-shadow: 
-    0 0.25em 0 0 #F37029,
-    0 0.5em 0 0 #F37029;
+    0 0.25em 0 0 #6E6E6E,
+    0 0.5em 0 0 #6E6E6E;
+}
+
+.nav-item .btn.btn-success {
+  background:  #170EF1;
+}
+
+.nav-item .btn.btn-warning {
+  background-color: #ED591B;
 }
