@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Chatnow-b ~ Chatbot for NOW Finance</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Project to develop chatbot for NOW FINANCE to enhance the customer experience."/>
+      <meta name="keywords" content="chatbots, bots, finance"/>
+      <meta name="robots" content="follow"/>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" >
+      <link rel="stylesheet" href="/css/app.css" >
+      <style>
+         html,body {
+            min-height: 102vh
+         }
+
+         body {
+        
+            background: linear-gradient(to top, #00c6fb 0%, #005bea 100%) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+         }
+         .box {
+          width: max-content;
+          overflow: hidden;
+         }
+      </style>
+   </head>
+   <body>
+   	 {{{body}}}
+
+<div class="cbt">
+    <button class="cbt-support">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="messaging_conversation" width="100%" height="100%"><path fill="#FFF" d="M13.1 17.1c2.6-.9 4.1-2.5 4.5-4.7 1.1.5 1.8 1.6 1.8 2.8 0 .6-.1 1.1-.3 1.5l.4 1.3c.1.3-.2.6-.5.5l-1.3-.5c-.5.3-1.1.5-1.7.5-1.2 0-2.2-.6-2.9-1.4zM10.6 5.3c3.2 0 5.8 2.4 5.8 5.4 0 3-2.6 5.4-5.8 5.4-1.1 0-2.2-.3-3-.8-.1-.1-.3-.1-.4-.1l-1.7.6c-.3.1-.6-.1-.5-.5l.6-1.7c0-.1 0-.2-.1-.3-.4-.8-.7-1.7-.7-2.6 0-3 2.6-5.4 5.8-5.4zM7.7 8.9c-.3 0-.5.2-.5.5v.4c0 .3.2.5.5.5h6.2c.3 0 .5-.2.5-.5v-.4c0-.3-.2-.5-.5-.5H7.7zm0 2.6c-.3 0-.5.2-.5.5v.5c0 .2.2.5.5.5H11c.3 0 .5-.3.5-.5V12c0-.3-.2-.5-.5-.5H7.7z"></path></svg>
+        </button>
+    <div class="cbt-container">
+        <div class="cbt-input">
+            <div class="cbt-msg" id="conversation" ></div>
+            <form onsubmit="return pushChat();" >
+                <textarea placeholder="Type your query ..." onkeypress="onkeychange(event);" ></textarea>
+                <button onclick="return pushChat();" >Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.41.0.min.js"></script>
+       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<script>
+  $(function () {
+    const container$ = $('.cbt-container');
+
+    $('#try-now, .cbt-support').on('click', event => {
+      container$.toggleClass('active');
+    });
+
+    $(document).on('click', event => {
+      if(event.target.closest('.cbt') || $(event.target).is('#try-now') ) {
+        return;
+      }
+
+      container$.removeClass('active');
+    });
+
+  });
+
+
+      function onkeychange(e) {
+ 
+      if( e && e.keyCode && e.keyCode == 13) {
+      
+         pushChat();
+           e.value = '';
+           return;
+      }
+    }
+</script>
+
+      <script>
+         // Initialize the Amazon Cognito credentials provider
+         AWS.config.region = 'us-east-1'; // Region
+         AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+         // Provide your Pool Id here
+         IdentityPoolId: 'us-east-1:a0d106cd-e349-443a-b7f8-e25f5106a66d',
+         });
+         
+         var lexruntime = new AWS.LexRuntime();
+         var lexUserId = 'chatbot-' + Date.now();
+         var sessionAttributes = {};
+         
+         function pushChat() {
+ 
+         // if there is text to be sent...
+         var wisdomText = document.querySelector('.cbt-input textarea');
+         if (wisdomText && wisdomText.value && wisdomText.value.trim().length > 0) {
+
+         // disable input to show we're sending it
+         var wisdom = wisdomText.value.trim();
+         wisdomText.value = '...';
+         wisdomText.locked = true;
+         
+         // send it to the Lex runtime
+         var params = {
+          botAlias: 'chatfinance',
+          botName: 'Chat_finance',
+          inputText: wisdom,
+          userId: lexUserId,
+          sessionAttributes: sessionAttributes
+         };
+        
+         showRequest(wisdom);
+
+         lexruntime.postText(params, function(err, data) {
+          if (err) {
+            console.log(err, err.stack);
+            showError('Error:  ' + err.message + ' (see console for details)')
+          }
+          if (data) {
+            // capture the sessionAttributes for the next cycle
+            sessionAttributes = data.sessionAttributes;
+            // show response and/or error/dialog status
+            showResponse(data);
+          }
+          // re-enable input
+          wisdomText.value = '';
+          wisdomText.locked = false;
+         });
+         }
+
+         // we always cancel form submission
+         return false;
+         }
+         
+         function showRequest(daText) {
+         
+         var conversationDiv = document.getElementById('conversation');
+         var requestPara = document.createElement("P");
+         requestPara.className = `cbt-user`;
+         requestPara.appendChild(document.createTextNode(daText));
+         conversationDiv.appendChild(requestPara);
+         conversationDiv.scrollTop = conversationDiv.scrollHeight;
+         }
+         
+         function showError(daText) {
+         
+         var conversationDiv = document.getElementById('conversation');
+         var errorPara = document.createElement("P");
+         errorPara.className = 'lexError';
+         errorPara.appendChild(document.createTextNode(daText));
+         conversationDiv.appendChild(errorPara);
+         conversationDiv.scrollTop = conversationDiv.scrollHeight;
+         }
+         
+         function showResponse(lexResponse) {
+         
+         var conversationDiv = document.getElementById('conversation');
+         var responsePara = document.createElement("P");
+         responsePara.className = `cbt-bot`;
+         if (lexResponse.message) {
+         responsePara.appendChild(document.createTextNode(lexResponse.message));
+         responsePara.appendChild(document.createElement('br'));
+         }
+         // if (lexResponse.dialogState === 'ReadyForFulfillment') {
+         // responsePara.appendChild(document.createTextNode(
+         //  'Ready for fulfillment'));
+         // // TODO:  show slot values
+         // } else {
+         // responsePara.appendChild(document.createTextNode(
+         //  '(' + lexResponse.dialogState + ')'));
+         // }
+         conversationDiv.appendChild(responsePara);
+         conversationDiv.scrollTop = conversationDiv.scrollHeight;
+         }
+      </script>
+   </body>
+</html>

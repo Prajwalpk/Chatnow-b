@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>Chatnow-b</title>
+<link rel="stylesheet" type="text/css" href="graphicssheet.css">
+</head>
+<body id="bodyid">
+<script type="text/javascript">
+function sending()
+{
+var msg=document.getElementById("tmsgbox").value;
+var para1 = document.createElement("p");
+para1.setAttribute('class',"sendmsg");
+para1.innerHTML = msg;
+var ele=document.getElementById("bodyid");
+ele.appendChild(para1);
+var para2 = document.createElement("p");
+para2.innerHTML='</br></br></br>';
+ele.appendChild(para2);
+
+replytomsg();
+}
+function replytomsg()
+{
+	msg=document.getElementById("tmsgbox").value;
+	if(msg=="hi"||msg=="Hi")
+	{
+		var para1 = document.createElement("p");
+		para1.setAttribute('class',"revmsg");
+		para1.innerHTML = "Hi User 0";
+		var ele=document.getElementById("bodyid");
+		ele.appendChild(para1);
+		var para2 = document.createElement("p");
+		para2.innerHTML='</br></br></br></br>';
+		ele.appendChild(para2);
+		var para3 = document.createElement("p");
+		para3.setAttribute('class',"revmsg");
+		para3.innerHTML = "How may i help you?";
+		ele.appendChild(para3);
+		var para4 = document.createElement("p");
+		para4.innerHTML='</br></br></br></br>';
+		ele.appendChild(para4);
+	}
+}
+</script>
+<p class="welcome">Welcome to Now Finance Chatnow-b    <img src="/art/chatimg.png"></p>
+<input type="textbox" id="tmsgbox" class="typemsgbox" placeholder="Type your message here"/>
+<input type="button" onclick="sending()" class="sendbutton" value="Send" />
+
+
+</body>
+</html>

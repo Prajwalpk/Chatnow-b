@@ -1,0 +1,31 @@
+
+<div class="container" style=" margin-top: 10rem;">
+   
+   {{#if message}}
+   <div class="row">
+      <div class="col-6 offset-3">
+         <div class="alert alert-danger">
+      {{message}}
+   </div>
+      </div>
+   </div>
+   {{/if}}
+
+   <div class="row justify-content-center">
+      <div class="bg-white col-lg-5 jumbotron shadow-lg" style=" padding: 2rem">
+         <form id="register-confirm" name="register-confirm" method="POST" action="/register-confirmation">
+            <h1 class="font-weight-bold h6 text-uppercase text-center">Register Confirmation</h1>
+
+            <div class="form-group">
+               <label class="label" for="code">Code</label>
+
+                  <input  class="form-control"  type="text" id="code" name="code" required>
+            </div>
+  
+            <button class="btn  btn-primary btn-block btn-lg" >
+            Confirm Sign Up
+            </button>
+         </form>
+      </div>
+   </div>
+</div>

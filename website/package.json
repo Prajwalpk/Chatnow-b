@@ -1,0 +1,14 @@
+{
+  "name": "Chatnow-b",
+  "description": "Chatnow-b monorepo ",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd website && npm i && nodemon server.js"
+  },
+  "keywords": ["bots", "chatbots", "aws", "login", "register", "auth"],
+
+  "engines": {
+    "node": ">= 8.0"
+  }
+}
