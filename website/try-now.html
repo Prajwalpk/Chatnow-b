@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Chatnow-b</title>
+<link rel="stylesheet" type="text/css" href="public/graphicssheet.css">
+</head>
+<body id="bodyid">
+<script type="text/javascript">
+function sending()
+{
+var msg=document.getElementById("tmsgbox").value;
+var para1 = document.createElement("p");
+para1.setAttribute('class',"sendmsg");
+para1.innerHTML = msg;
+var ele=document.getElementById("bodyid");
+ele.appendChild(para1);
+var para2 = document.createElement("p");
+para2.innerHTML='</br></br></br>';
+ele.appendChild(para2);
+replytomsg();
+}
+function replytomsg()
+{
+	msg=document.getElementById("tmsgbox").value;
+	if(msg=="hi"||msg=="Hi")
+	{
+		var para1 = document.createElement("p");
+		para1.setAttribute('class',"revmsg");
+		para1.innerHTML = "Hi User 0";
+		var ele=document.getElementById("bodyid");
+		ele.appendChild(para1);
+		var para2 = document.createElement("p");
+		para2.innerHTML='</br></br></br></br>';
+		ele.appendChild(para2);
+		var para3 = document.createElement("p");
+		para3.setAttribute('class',"revmsg");
+		para3.innerHTML = "Welcome to Now Finance How may i help you?";
+		ele.appendChild(para3);
+		var para4 = document.createElement("p");
+		para4.innerHTML='</br></br></br></br>';
+		ele.appendChild(para4);
+	}
+document.getElementById('tmsgbox').value = '';
+
+}
+</script>
+<style type="text/css">
+#element1 {float:left;padding:40px;}
+#element2 {float:center}
+</style>
+
+<div id="element1">
+<a href="https://nowfinance.com.au/"><img src="public/art/logos.png"></a>
+</div>
+<div id="element2">
+ <p class="welcome">Chatnow-b</p>
+</div>
+
+<input type="textbox" id="tmsgbox" class="typemsgbox" placeholder="Type your message here"/>
+<input type="submit" onclick="sending()" value="Send" class="sendbutton"/>
+
+</body>
+</html>
