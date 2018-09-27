@@ -5,7 +5,7 @@
 }
 
 .cbt-support {
-  background: #f27028;
+  background: #170EF1;
   border-radius: 50%;
   height: 4rem;
   width: 4rem;
@@ -92,4 +92,29 @@
   width: min-content;
   border-radius: 4px;
   text-align: left;
+}
+
+/*custom color on navbar items*/
+.nav-link {
+  color: #6E6E6E;
+}
+
+.nav-link:hover {
+  color: #FE7436;
+}
+
+.nav-item .btn.btn-warning {
+  background-color: #ED591B;
+  color: white;
+}
+
+.navbar-toggler-icon {
+  content: "";
+  left: 0;
+  width: 1em;
+  height: 0.15em;
+  background: #F37029;
+  box-shadow: 
+    0 0.25em 0 0 #F37029,
+    0 0.5em 0 0 #F37029;
 }
