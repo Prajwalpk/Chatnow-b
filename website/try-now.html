@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>Chatnow-b</title>
-<link rel="stylesheet" type="text/css" href="graphicssheet.css">
+<link rel="stylesheet" type="text/css" href="public/graphicssheet.css">
 </head>
 <body id="bodyid">
 <script type="text/javascript">
@@ -16,7 +16,6 @@ ele.appendChild(para1);
 var para2 = document.createElement("p");
 para2.innerHTML='</br></br></br>';
 ele.appendChild(para2);
-
 replytomsg();
 }
 function replytomsg()
@@ -34,18 +33,30 @@ function replytomsg()
 		ele.appendChild(para2);
 		var para3 = document.createElement("p");
 		para3.setAttribute('class',"revmsg");
-		para3.innerHTML = "How may i help you?";
+		para3.innerHTML = "Welcome to Now Finance How may i help you?";
 		ele.appendChild(para3);
 		var para4 = document.createElement("p");
 		para4.innerHTML='</br></br></br></br>';
 		ele.appendChild(para4);
 	}
+document.getElementById('tmsgbox').value = '';
+
 }
 </script>
-<p class="welcome">Welcome to Now Finance Chatnow-b    <img src="/art/chatimg.png"></p>
-<input type="textbox" id="tmsgbox" class="typemsgbox" placeholder="Type your message here"/>
-<input type="button" onclick="sending()" class="sendbutton" value="Send" />
+<style type="text/css">
+#element1 {float:left;padding:40px;}
+#element2 {float:center}
+</style>
 
+<div id="element1">
+<a href="https://nowfinance.com.au/"><img src="public/art/logos.png"></a>
+</div>
+<div id="element2">
+ <p class="welcome">Chatnow-b</p>
+</div>
+
+<input type="textbox" id="tmsgbox" class="typemsgbox" placeholder="Type your message here"/>
+<input type="submit" onclick="sending()" value="Send" class="sendbutton"/>
 
 </body>
 </html>
