@@ -6,9 +6,19 @@
   "scripts": {
     "start": "cd website && npm i && nodemon server.js"
   },
-  "keywords": ["bots", "chatbots", "aws", "login", "register", "auth"],
-
+  "keywords": [
+    "bots",
+    "chatbots",
+    "aws",
+    "login",
+    "register",
+    "auth"
+  ],
   "engines": {
     "node": ">= 8.0"
+  },
+  "dependencies": {
+    "randomstring": "^1.1.5",
+    "stripchar": "^1.2.1"
   }
 }

@@ -50,7 +50,7 @@ Amplify.configure({
 
 const app = express();
 
-app.set("port", process.env.PORT || 8888);
+app.set("port", process.env.PORT || 1234);
 app.use(express.static(__dirname + "/public"));
 
 app.engine("handlebars", hbs({ defaultLayout: "skeleton" }));
